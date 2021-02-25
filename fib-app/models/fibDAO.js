@@ -2,8 +2,6 @@
 const { resourceLimits } = require("worker_threads");
 const connection = require("../config/db-connection.js");
 
-var results = [];
-
 var table = "fibonacci";
 var asc ;
 
@@ -36,7 +34,6 @@ FibDAO.sortDesc = result => {
     }
     asc = res[res.length - 1].series.split( ',' );
     result(null,asc.reverse());       
-    //result(null,iterator(res));   
   });
 };
 
@@ -70,8 +67,8 @@ FibDAO.search = (search,result) => {
 // Insert DB Service 
 FibDAO.insertAll = (fibDAO, maxRange, result) => {
   // Generate fibonacci series for the given max range
-
-  fibDAO = generate(maxRange);
+  var results = [];
+  fibDAO = generate(results,maxRange);
 
   connection.query(`INSERT INTO fibonacci SET series='${fibDAO}'`,(err, res) => {
     if (err) {
@@ -86,7 +83,7 @@ FibDAO.insertAll = (fibDAO, maxRange, result) => {
 }
 
 // Generate Fibonacci Series
-const generate = (maxRange) => {
+const generate = (results,maxRange) => {
   results.push(1);
   results.push(2);
   process(results, maxRange).then(function () {
