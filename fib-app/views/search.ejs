@@ -1,0 +1,20 @@
+<html>
+
+<head>
+  <title>Fibonacci Fun</title>
+  <%- include('common/head'); %>
+</head>
+
+<body>
+  <%- include('common/header'); %>
+    <form action="/search" method="post" class="form-signin">
+      <div class="form-group">
+        <label for="searchid">Search</label>
+        <input type="text" id="searchtxt" class="form-control" name="searchId" placeholder="Enter">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <%- include('common/footer'); %>
+</body>
+
+</html>

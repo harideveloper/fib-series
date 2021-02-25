@@ -1,0 +1,38 @@
+{
+  "name": "fib-app",
+  "version": "1.0.0",
+  "description": "Node JS Application to Generate Fibonacci Series",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harideveloper/fib-series.git"
+  },
+  "keywords": [
+    "fib-app",
+    "fib-db"
+  ],
+  "author": "Hariprasad Sundaresan",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7"
+  },
+  "bugs": {
+    "url": "https://github.com/harideveloper/fib-series/issues"
+  },
+  "homepage": "https://github.com/harideveloper/fib-series#readme"
+}
+
+
+
+

@@ -1,0 +1,52 @@
+version: '3.6'
+
+x-common-variables: &common-variables
+  MYSQL_PASSWORD: password
+  MYSQL_USER: root
+  MYSQL_DATABASE: fibdb 
+
+services:
+    fib-db-service:
+        build:
+            context: ./fib-db
+            dockerfile: Dockerfile
+        image: fib-db
+        container_name: fib-db-container
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+        ports:
+            - "127.0.0.1:3306:3306"
+        expose:
+            - "3306"
+        networks:
+            - app-network
+    fib-app-service:
+        build:
+            context: ./fib-app
+            dockerfile: Dockerfile
+        image: fib-app
+        container_name: fib-app-container
+        environment:
+          <<: *common-variables
+          MYSQL_HOST: fib-db-service
+        depends_on:
+            - fib-db-service
+        ports:
+            - "127.0.0.1:7000:7000"
+        expose:
+            - "7000"
+        links:
+            - fib-db-service
+        networks:
+            - app-network
+
+
+networks:
+    app-network:
+        driver: bridge
+
+
+ 
+  
+
+
