@@ -22,10 +22,11 @@ exports.createSeries = (req,res) => {
     id: req.id,
     series: req.series
   });
-  FibDAO.insertAll(fibDAO, (err,data) => {
+
+  FibDAO.insertAll(fibDAO,req.body.maxRange, (err,data) => {
     if(err) {
       res.status(500).send({
-        message: err.message || "Error : Insert Fibonacci Series Failed"
+        message: err.message || "Error :  Insert Fibonacci Series Failed"
       });
     } else {
       res.render('create.ejs', { data: data });

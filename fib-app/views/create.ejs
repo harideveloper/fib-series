@@ -8,9 +8,20 @@
       <%- include('common/header'); %>
       <div class="jumbotron">
         
-        <h3>Fibonacci created successful</h3>
-        <p><%= data %></p>
+        <h3>Generate Fibonacci Series</h3>
+
+        <form action="/create" method="post" class="form-signin">
+          <div class="form-group">
+            <label for="searchid">Search</label>
+            <input type="text" id= "maxRange" class="form-control" name="maxRange" placeholder="Enter Max Range">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
       </div>
+
+   
+      
       <%- include('common/footer'); %>
   </body>
   </html>

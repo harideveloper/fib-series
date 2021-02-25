@@ -4,11 +4,6 @@ const connection = require("../config/db-connection.js");
 
 var results = [];
 
-// change here to test
-//var max_range= 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
-var max_range = 2000;
-//var max_range = 100;
-
 var table = "fibonacci";
 var asc ;
 
@@ -72,11 +67,12 @@ FibDAO.search = (search,result) => {
   });
 };
 
-
 // Insert DB Service 
-FibDAO.insertAll = (fibDAO, result) => {
+FibDAO.insertAll = (fibDAO, maxRange, result) => {
   // Generate fibonacci series for the given max range
-  fibDAO = generate(max_range);
+
+  fibDAO = generate(maxRange);
+
   connection.query(`INSERT INTO fibonacci SET series='${fibDAO}'`,(err, res) => {
     if (err) {
       console.log("Error in DB Operation: ", err);
@@ -90,24 +86,24 @@ FibDAO.insertAll = (fibDAO, result) => {
 }
 
 // Generate Fibonacci Series
-const generate = (max_range) => {
+const generate = (maxRange) => {
   results.push(1);
   results.push(2);
-  process(results, max_range).then(function () {
+  process(results, maxRange).then(function () {
     results.forEach(function (element) {
     })
   });
   return results;
 }
 
-const process = (results, max_range) => {
+const process = (results, maxRange) => {
   return new Promise(function (resolve, reject) {
     item = results[results.length - 1] + results[results.length - 2];
-    if (item > max_range) {
+    if (item > maxRange) {
       resolve();
     } else {
       results.push(item);
-      resolve(process(results, max_range)).catch(reject);
+      resolve(process(results, maxRange)).catch(reject);
     }
   });
 }
